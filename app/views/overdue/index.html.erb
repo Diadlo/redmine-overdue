@@ -1,0 +1,32 @@
+<h2>Просрочка</h2>
+
+<style>
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Участник</th>
+            <th>Задержка (0-2)</th>
+            <th>Опоздание (3-7)</th>
+            <th>Просрочка (7+)</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user, overdues| %>
+        <tr>
+            <td><%= user %></td>
+            <% overdues.each do |count| %>
+                <td><%= count %></td>
+            <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
