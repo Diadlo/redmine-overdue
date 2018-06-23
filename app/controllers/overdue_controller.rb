@@ -1,15 +1,15 @@
 class OverdueController < ApplicationController
 
     module Overdue
-        SMALL  = 0
-        AVERAE = 1
-        LARGE  = 2
+        SMALL   = 0
+        AVERAGE = 1
+        LARGE   = 2
     end
 
     def overdue_category(overdue)
-        if overdue < 2
+        if overdue <= 2
             return Overdue::SMALL
-        elif overdue < 7
+        elsif overdue <= 7
             return Overdue::AVERAGE
         else
             return Overdue::LARGE
