@@ -17,15 +17,17 @@ table, th, td {
             <th>Задержка (0-2)</th>
             <th>Опоздание (3-7)</th>
             <th>Просрочка (7+)</th>
+            <th>Суммарно просрочено</th>
         </tr>
     </thead>
     <tbody>
-    <% @users.each do |user, overdues| %>
+    <% @overdues.each do |overdue| %>
         <tr>
-            <td><%= user %></td>
-            <% overdues.each do |count| %>
+            <td><%= overdue.user %></td>
+            <% overdue.categories.each do |count| %>
                 <td><%= count %></td>
             <% end %>
+            <td><%= overdue.get_sum %></td>
         </tr>
     <% end %>
     </tbody>

@@ -1,26 +1,42 @@
-class OverdueController < ApplicationController
+class Overdue
 
-    module Overdue
-        SMALL   = 0
-        AVERAGE = 1
-        LARGE   = 2
-    end
-
-    def overdue_category(overdue)
+    def time_to_category(overdue)
         if overdue <= 2
-            return Overdue::SMALL
+            return 0
         elsif overdue <= 7
-            return Overdue::AVERAGE
+            return 1
         else
-            return Overdue::LARGE
+            return 2
         end
     end
 
+    def initialize(user)
+        @sum_overdue = 0
+        @user = user
+        @categories = Array.new(3) { 0 }
+    end
+
+    def get_sum()
+        return @sum_overdue.to_i
+    end
+
+    attr_reader :user
+    attr_reader :categories
+
+    def add_overdue(time)
+        @sum_overdue += time
+        cat = time_to_category(time)
+        @categories[cat] += 1
+    end
+end
+
+class OverdueController < ApplicationController
+
     def index
         @project = Project.find(params[:project_id])
-        @users = Hash.new
+        users = Hash.new
         @project.users.each { |user|
-            @users[user] = Array.new(3) { 0 }
+            users[user] = Overdue.new(user)
         }
 
         @project.issues.each { |issue|
@@ -34,9 +50,10 @@ class OverdueController < ApplicationController
             end
 
             user = User.find(issue.assigned_to_id)
-            category = overdue_category(overdue)
-            @users[user][category] += 1
+            users[user].add_overdue(overdue)
         }
 
+        # Reverse order
+        @overdues = users.values.sort_by { |overdue| -overdue.get_sum }
   end
 end
