@@ -35,22 +35,28 @@ class OverdueController < ApplicationController
     def index
         @project = Project.find(params[:project_id])
         users = Hash.new
-        @project.users.each { |user|
-            users[user] = Overdue.new(user)
-        }
 
-        @project.issues.each { |issue|
-            if (issue.due_date == nil || issue.assigned_to_id == nil)
-                next
-            end
+        projects = @project.children
+        projects.push(@project)
 
-            overdue = Time.now.to_date - issue.due_date
-            if (overdue <= 0)
-                next
-            end
+        projects.each { |project|
+            project.issues.each { |issue|
+                if (issue.due_date == nil || issue.assigned_to_id == nil)
+                    next
+                end
 
-            user = User.find(issue.assigned_to_id)
-            users[user].add_overdue(overdue)
+                overdue = Time.now.to_date - issue.due_date
+                if (overdue <= 0)
+                    next
+                end
+
+                user = User.find(issue.assigned_to_id)
+                if (users[user] == nil)
+                    users[user] = Overdue.new(user)
+                end
+
+                users[user].add_overdue(overdue)
+            }
         }
 
         # Reverse order
