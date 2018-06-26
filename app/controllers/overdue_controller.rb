@@ -19,6 +19,10 @@ class OverdueController < ApplicationController
     def index
         @project = Project.find(params[:project_id])
         @users = Hash.new
+        @project.users.each { |user|
+            @users[user] = Array.new(3) { 0 }
+        }
+
         @project.issues.each { |issue|
             if (issue.due_date == nil || issue.assigned_to_id == nil)
                 next
@@ -30,12 +34,9 @@ class OverdueController < ApplicationController
             end
 
             user = User.find(issue.assigned_to_id)
-            if (@users[user] == nil)
-                @users[user] = Array.new(3) { 0 }
-            end
-
             category = overdue_category(overdue)
             @users[user][category] += 1
         }
+
   end
 end
