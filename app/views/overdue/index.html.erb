@@ -32,3 +32,41 @@ table, th, td {
     <% end %>
     </tbody>
 </table>
+
+<% def print_category(overdue, name, i) %>
+    <div class="<%= name %>">
+        <% (1..overdue.categories[i]).each do |n| %>
+            <div class="block <%= name %>-block">
+            </div>
+        <% end %>
+    </div>
+<% end %>
+
+<div class="overdue">
+    <div class="header">
+        <div class="text user">Участник</div>
+        <div class="text sum">Суммарная задержка</div>
+        <div class="rest-row">"Достижения"</div>
+    </div>
+    <% @overdues.each do |overdue| %>
+    <div class="row">
+        <div class="text user">
+            <%= overdue.user %>
+        </div>
+
+        <div class="rest-row">
+            <div class="text sum">
+                <%= overdue.get_sum %>
+            </div>
+
+            <% print_category(overdue, "small", 0) %>
+            <% print_category(overdue, "average", 1) %>
+            <% print_category(overdue, "large", 2) %>
+        </div>
+    </div>
+    <% end %>
+</div>
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'overdue', :plugin => 'overdue' %>
+<% end %>

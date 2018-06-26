@@ -1,0 +1,85 @@
+table {
+	display: none;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+}
+
+.header > * {
+	font-weight: bold;
+}
+
+.user {
+	width: 150px
+}
+
+.overdue {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.rest-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.sum {
+	width: 100px;
+}
+
+.text {
+	margin: auto 0px;
+}
+
+.small {
+	display: flex;
+	flex-direction: row;
+}
+
+.average {
+	display: flex;
+	flex-direction: row;
+}
+
+.large {
+	display: flex;
+	flex-direction: row;
+}
+
+.block {
+	width: 30px;
+	height: 30px;
+	background-size: cover;
+	margin: 5px;
+}
+
+.small-block {
+	background-image: url("../images/clock.png");
+}
+
+.average-block {
+	background-image: url("../images/calendar.png");
+}
+
+.large-block {
+	background-image: url("../images/pig.png");
+}
+
+.sum-first {
+	margin: auto 2px;
+	width: 70px
+}
+
+.sum-last {
+	display: none;
+}
+
+.rest-row {
+}
