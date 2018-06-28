@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 Redmine::Plugin.register :overdue do
   name 'Overdue plugin'
   author 'Author name'
@@ -7,5 +9,5 @@ Redmine::Plugin.register :overdue do
   author_url 'http://example.com/about'
 
   permission :overdue, { :overdue => [:index] }, :public => true
-  menu :project_menu, :overdue, { :controller => 'overdue', :action => 'index' }, :caption => 'Overdue', :param => :project_id
+  menu :project_menu, :overdue, { :controller => 'overdue', :action => 'index' }, :caption => 'Просрочка', :param => :project_id
 end
