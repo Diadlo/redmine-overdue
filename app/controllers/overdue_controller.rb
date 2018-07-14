@@ -42,7 +42,8 @@ class OverdueController < ApplicationController
 
         projects.each { |project|
             project.issues.each { |issue|
-                if (issue.due_date == nil || issue.assigned_to_id == nil)
+                if (issue.due_date == nil || issue.assigned_to_id == nil ||
+                    issue.status.is_closed)
                     next
                 end
 
