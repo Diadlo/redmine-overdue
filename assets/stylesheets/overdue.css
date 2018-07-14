@@ -83,3 +83,11 @@ table {
 
 .rest-row {
 }
+
+.info {
+	display: flex;
+}
+
+.info-comment {
+	margin: auto 0;
+}

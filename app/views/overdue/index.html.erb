@@ -67,6 +67,41 @@ table, th, td {
     <% end %>
 </div>
 
+<hr>
+
+<footer>
+    Легенда:
+    <br>
+    "Суммарная задержка" отображает суммарное время всех просрочек в днях.
+    <br>
+    "Достижения" отображают в виде иконок просроченные задачи. Количество иконок
+    соответствует количесту просроченных задач.
+    <br>
+    Значения иконок:
+    <br>
+    <div class="info">
+        <div class="block small-block">
+        </div>
+        <div class="info-comment">
+            Просрочка менее двух дней
+        </div>
+    </div>
+    <div class="info">
+        <div class="block average-block">
+        </div>
+        <div class="info-comment">
+            Просрочка менее недели
+        </div>
+    </div>
+    <div class="info">
+        <div class="block large-block">
+        </div>
+        <div class="info-comment">
+            Просрочка более недели
+        </div>
+    </div>
+</footer>
+
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'overdue', :plugin => 'overdue' %>
 <% end %>
