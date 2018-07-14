@@ -36,7 +36,8 @@ class OverdueController < ApplicationController
         @project = Project.find(params[:project_id])
         users = Hash.new
 
-        projects = @project.children
+        projects = Array.new
+        #projects = @project.children
         projects.push(@project)
 
         projects.each { |project|
